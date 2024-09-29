@@ -22,7 +22,7 @@ public class ArrayOperations {
                 numbers[i] = scanner.nextInt();
             }
         } else {
-            numbers = new int[]{12, 5, 8, 22, 14, 9}; // constant array
+            numbers = new int[]{12, 5, 8, 22, 14, 9};
         }
 
         Arrays.sort(numbers);
