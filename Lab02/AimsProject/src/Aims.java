@@ -10,11 +10,13 @@ public class Aims {
         cart.addDigitalVideoDisc(dvd1);
         cart.addDigitalVideoDisc(dvd2);
         cart.addDigitalVideoDisc(dvd3);
+        cart.removeDigitalVideoDisc(dvd2);
 
         //Add to custommer cart
         customer.addToOrderHistory(cart);
 
         //Display customer cartt
         customer.displayCustomerInfo();
+        System.out.println("Total cost: " + cart.totalCost());
     }
 }
