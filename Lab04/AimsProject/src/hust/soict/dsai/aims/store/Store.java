@@ -1,58 +1,60 @@
 package hust.soict.dsai.aims.store;
 
-import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.Media;
+import java.util.ArrayList;
 
 public class Store {
-    // Attribute: Array to store DVDs
-    private DigitalVideoDisc[] itemsInStore = new DigitalVideoDisc[50]; // Capacity of 50 DVDs
-    private int qtyInStore = 0; // Number of DVDs currently in the store
+    // Attribute: ArrayList to store Media items
+    private ArrayList<Media> itemsInStore = new ArrayList<>(); // Flexible size
+    private int nextId = 1; // ID bắt đầu từ 1
 
-    // Method to add a DVD to the store
-    public void addDVD(DigitalVideoDisc dvd) {
-        if (qtyInStore < itemsInStore.length) {
-            itemsInStore[qtyInStore] = dvd;
-            qtyInStore++;
-            System.out.println("The DVD \"" + dvd.getTitle() + "\" has been added to the store.");
+    // Method to add a Media item to the store
+    public void addMedia(Media media) {
+        media.setId(nextId++); // Tự động gán ID cho media mới
+        itemsInStore.add(media);
+        System.out.println("The media \"" + media.getTitle() + "\" has been added to the store.");
+    }
+
+    // Method to remove a Media item from the store
+    public void removeMedia(Media media) {
+        if (itemsInStore.remove(media)) {
+            System.out.println("The media \"" + media.getTitle() + "\" has been removed from the store.");
         } else {
-            System.out.println("The store is full. Cannot add more DVDs.");
+            System.out.println("The media \"" + media.getTitle() + "\" is not found in the store.");
         }
     }
 
-    // Method to remove a DVD from the store
-    public void removeDVD(DigitalVideoDisc dvd) {
-        for (int i = 0; i < qtyInStore; i++) {
-            if (itemsInStore[i] == dvd) {
-                // Shift remaining DVDs
-                for (int j = i; j < qtyInStore - 1; j++) {
-                    itemsInStore[j] = itemsInStore[j + 1];
-                }
-                itemsInStore[qtyInStore - 1] = null; // Clear the last slot
-                qtyInStore--;
-                System.out.println("The DVD \"" + dvd.getTitle() + "\" has been removed from the store.");
-                return;
-            }
-        }
-        System.out.println("The DVD \"" + dvd.getTitle() + "\" is not found in the store.");
-    }
-
-    // Method to print all DVDs in the store
+    // Method to print all Media items in the store
     public void printStore() {
         System.out.println("***********************STORE***********************");
-        if (qtyInStore == 0) {
+        if (itemsInStore.isEmpty()) {
             System.out.println("The store is empty.");
         } else {
-            for (int i = 0; i < qtyInStore; i++) {
-                DigitalVideoDisc dvd = itemsInStore[i];
-                System.out.printf("%d. DVD - %s - %s - %s - %d mins: %.2f $\n",
-                        i + 1,
-                        dvd.getTitle(),
-                        dvd.getCategory() != null ? dvd.getCategory() : "Unknown",
-                        dvd.getDirector() != null ? dvd.getDirector() : "Unknown",
-                        dvd.getLength() > 0 ? dvd.getLength() : 0,
-                        dvd.getCost()
+            int index = 1;
+            for (Media media : itemsInStore) {
+                System.out.printf("%d. %s - %s - %.2f $\n",
+                        index++,
+                        media.getTitle(),
+                        media.getCategory() != null ? media.getCategory() : "Unknown",
+                        media.getCost()
                 );
             }
         }
         System.out.println("***************************************************");
     }
+
+    public int getNextId() {
+        return nextId++; // Trả về ID hiện tại và sau đó tăng ID lên 1
+    }
+
+    public Media find(String title) {
+        for (Media media : itemsInStore) {
+            if (media.getTitle().equalsIgnoreCase(title)) {
+                return media;
+            }
+        }
+        return null;
+    }
+
+    public boolean isEmpty() { return itemsInStore.isEmpty();}
 }

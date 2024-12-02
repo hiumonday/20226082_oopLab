@@ -1,21 +1,19 @@
 package hust.soict.dsai.aims;
 
-
 import hust.soict.dsai.aims.cart.Cart;
-import hust.soict.dsai.aims.disc.DigitalVideoDisc;
-
+import hust.soict.dsai.aims.media.DigitalVideoDisc;
 
 public class Aims {
     public static void main(String[] args) {
         Cart cart = new Cart();
 
-
+        DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King");
         DigitalVideoDisc dvd2 = new DigitalVideoDisc("Animation", "Frozen", 19.95f);
         DigitalVideoDisc dvd3 = new DigitalVideoDisc("James Cameron", "Action", "Avatar", 24.99f);
         DigitalVideoDisc dvd4 = new DigitalVideoDisc("Sci-Fi", "Star Wars", 20.00f);
 
         // Display information
-
+        System.out.println("DVD 1: " + dvd1.getTitle() + ", ID: " + dvd1.getId());
         System.out.println("DVD 2: " + dvd2.getTitle() + ", ID: " + dvd2.getId());
         System.out.println("DVD 3: " + dvd3.getTitle() + ", ID: " + dvd3.getId());
         System.out.println("DVD 4: " + dvd4.getTitle() + ", ID: " + dvd4.getId());
