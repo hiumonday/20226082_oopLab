@@ -54,7 +54,7 @@ public abstract class Media {
     public boolean equals(Object obj) {
         if (this == obj) return true;  // Check if the objects are the same instance
         if (obj == null || getClass() != obj.getClass()) return false; // Check class compatibility
-
+//can be overrided
         Media media = (Media) obj;
         return title != null && title.equalsIgnoreCase(media.title); // Compare titles ignoring case
     }
